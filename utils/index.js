@@ -2,8 +2,10 @@
 
 const utils = {};
 
-utils.getInitials = () => {
+utils.getInitials = (str) => {
   //your code here
+  let newStr = str[0].toUpperCase() + str.slice(1)
+  return newStr
 };
 
 utils.generateGroups = () => {

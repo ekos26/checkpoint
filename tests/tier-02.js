@@ -52,7 +52,7 @@ describe('Tier Two', () => {
           student = Student.build();
         });
 
-        xit('should require name', async () => {
+        it('should require name', async () => {
           try {
             await student.validate()
             throw new Error('Validation succeeded but should have failed')
@@ -61,7 +61,7 @@ describe('Tier Two', () => {
           }
         });
 
-        xit('should have a phase property of either NULL, "junior", or "senior" (nothing else)', async () => {
+        it('should have a phase property of either NULL, "junior", or "senior" (nothing else)', async () => {
           student.name = "Mariya Dova"
 
           // confirming these work fine
@@ -123,14 +123,14 @@ describe('Tier Two', () => {
       });
 
       describe('Campus', () => {
-        xit('should have associated students', async () => {
+        it('should have associated students', async () => {
           const result = await campus1.hasStudents([student1, student3])
           expect(result).to.be.true;
         });
       });
 
       describe('GET `/api/campuses/:id/students` route', () => {
-        xit('should get all students associated with a campus', async () => {
+        it('should get all students associated with a campus', async () => {
           const response = await agent.get('/api/campuses/1/students').expect(200);
           expect(response.body).to.have.length(2);
           expect(response.body[0].campusId).to.equal(1);
@@ -187,12 +187,12 @@ describe('Tier Two', () => {
       // put first student back
       marsCampus.students.unshift(firstStudent);
 
-      xit('should render the name of the campus in an h2', () => {
+      it('should render the name of the campus in an h2', () => {
         expect(renderedMarsCampus.find('h2').text()).to.equal('Mars');
         expect(renderedRedPlanetCampus.find('h2').text()).to.equal('Red Planet');
       });
 
-      xit('should render a list of <SingleStudent /> components with the student passed in', () => {
+      it('should render a list of <SingleStudent /> components with the student passed in', () => {
         const renderedMarsStudents = renderedMarsCampus.find(SingleStudent);
         expect(renderedMarsStudents.length).to.equal(4);
         expect(renderedMarsStudents.get(2).props.student.name).to.equal('Marvin Lee');
@@ -225,7 +225,7 @@ describe('Tier Two', () => {
         describe('action creator', () => {
           // defined in ../client/redux/actions.js
 
-          xit('action creator should allow synchronous creation of SELECT_CAMPUS actions', () => {
+          it('action creator should allow synchronous creation of SELECT_CAMPUS actions', () => {
             const selectCampusAction = selectCampus(marsCampus);
             expect(selectCampusAction.type).to.equal(SELECT_CAMPUS);
             expect(selectCampusAction.campus).to.equal(marsCampus);
@@ -235,7 +235,7 @@ describe('Tier Two', () => {
         describe('reducer', () => {
           // defined in ../client/redux/reducer.js
 
-          xit('returns an immutably-updated new state with selected campus', () => {
+          it('returns an immutably-updated new state with selected campus', () => {
             const newState = reducer(
               initialState,
               {
@@ -258,7 +258,7 @@ describe('Tier Two', () => {
         describe('action creator', () => {
           // defined in ../client/redux/actions.js
 
-          xit('fetchCampuses() returns a thunk to fetch campuses from the backend and dispatch a SET_CAMPUSES action', async () => {
+          it('fetchCampuses() returns a thunk to fetch campuses from the backend and dispatch a SET_CAMPUSES action', async () => {
             mock.onGet('/api/campuses').replyOnce(200, campuses);
             await store.dispatch(fetchCampuses())
             const actions = store.getActions();
@@ -287,21 +287,21 @@ describe('Tier Two', () => {
    */
 
   describe('`generateGroups` utility method', () => {
-    xit('takes an array and a number (size) and returns an array', () => {
+    it('takes an array and a number (size) and returns an array', () => {
       const groupsA = utils.generateGroups(['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'], 1);
       expect(groupsA).to.be.an('array');
       const groupsB = utils.generateGroups(['types', {dont: 'matter'}, 0], 3);
       expect(groupsB).to.be.an('array');
     });
 
-    xit('groups the input array elements into nested arrays of the given size, such that the nested arrays contain the original elements in the original order', () => {
+    it('groups the input array elements into nested arrays of the given size, such that the nested arrays contain the original elements in the original order', () => {
       const groupsA = utils.generateGroups(['a', 'b', 'c', 'd'], 2);
       expect(groupsA).to.deep.equal([['a', 'b'], ['c', 'd']]);
       const groupsB = utils.generateGroups(['up', 'charm', 'top', 'down', 'strange', 'bottom'], 3);
       expect(groupsB).to.deep.equal([['up', 'charm', 'top'], ['down', 'strange', 'bottom']]);
     });
 
-    xit('handles inexact multiples by putting the remainder in the last group', () => {
+    it('handles inexact multiples by putting the remainder in the last group', () => {
       const groupsA = utils.generateGroups([{id: 5}, {id: 10}, {id: 20}], 2);
       // by the way, any objects in the input array can be added into the groups by reference, no need to copy / clone them
       expect(groupsA).to.deep.equal([[{id: 5}, {id: 10}], [{id: 20}]]);
