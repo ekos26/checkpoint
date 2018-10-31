@@ -23,15 +23,18 @@ export const addCampus = (campus) => ({
 
 // THUNK CREATORS
 
-export const fetchCampuses = (dispatch) => {
-  //your code here
-  try {
-    const { data } = axios.get('/campuses')
-    dispatch({data})
-
-  } catch(err) {
-    console.error(err)
+export const fetchCampuses = () => {
+  return async(dispatch) => {
+    try {
+      const res= await axios.get('/api/campuses');
+      const campuses = res.data;
+      const action = setCampuses(campuses);
+      dispatch(action)
+    } catch(error) {
+      console.log(error)
+    }
   }
+  //your code here
 };
 
 export const postCampus = () => {

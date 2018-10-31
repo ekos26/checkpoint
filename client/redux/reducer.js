@@ -8,22 +8,16 @@ const initialState = {
 
 export default (state = initialState, action) => {
   //your code here
-  const newState = Object.assign({}, state)
     switch(action.type) {
       case SET_CAMPUSES:
-        return Object.assign({}, state, {
-          campuses: action.campuses
-        })
+        return {...state, campuses: action.campuses }
       case SELECT_CAMPUS:
-        return Object.assign({}, state, {
-          selectedCampus: action.selectedCampus
-        })
-      case ADD_CAMPUS:
-        newState.campus = state.campuses.concat[action.campus]
-          return newState
-
+        return {...state, selectedCampus: action.campus}
+      // case ADD_CAMPUS:
+      //   newState.campus = state.campuses.concat[action.campus]
+      //     return newState
       default:
-        return newState
+        return initialState;
     }
   return state;
 };

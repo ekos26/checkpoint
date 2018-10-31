@@ -8,17 +8,17 @@ const Student = db.define('student', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    // phase: {
-    //     validate: {
-    //         equals: 'NULL', 
-    //         equals:'junior',
-    //         equals: 'senior'
-    //     }
-    // }
+    phase: {
+        type: Sequelize.ENUM('NULL', 'junior', 'senior')
+    }
 });
 
-Student.findByPhase = async function() {
-    let studentPhase = await Student.findAll({ where: {phase} })
+Student.findByPhase = async function(phase) {
+    let studentPhase = await Student.findAll({ 
+        where: {
+            phase
+        } 
+    })
         return studentPhase
 }
 

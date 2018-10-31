@@ -36,21 +36,21 @@ router.get('/:id/students', async (req, res, next) => {
     }
 })
 
-router.post('/', async (req, res, next) => {
-    try {
-        const newCampus = await Campus.create(req.body)
-        res.json(newCampus)
-    } catch(err) {
-        next(err)
-    }
-})
+// router.post('/', async (req, res, next) => {
+//     try {
+//         const newCampus = await Campus.create(req.body)
+//         res.json(newCampus)
+//     } catch(err) {
+//         next(err)
+//     }
+// })
 
-router.post('/:id/students', async (req, res, next) => {
-    try{
+// router.post('/:id/students', async (req, res, next) => {
+//     try{
 
-    } catch(err) {
-        next(err)
-    }
-})
+//     } catch(err) {
+//         next(err)
+//     }
+// })
 
 module.exports = router;

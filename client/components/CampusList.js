@@ -3,9 +3,11 @@ import React from 'react';
 const CampusList = (props) => {
   // your code here
   return (
-    <ul>
-      <li>{props.campuses}</li>
-    </ul>
+		<ul>
+			{props.campuses.map((campus) => {
+				return <li key={campus.id}>{campus.name}</li>;
+			})}
+		</ul>
   )
 };
 

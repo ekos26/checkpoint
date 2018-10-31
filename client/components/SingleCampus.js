@@ -5,11 +5,15 @@ const SingleCampus = (props) => {
 
   return (
     <h2>{props.campus.name}</h2>
-    // <li>
-    // <SingleStudent />
-    // </li>
-  )
-  return null;
+
+      //   { props.students.map((student) => {
+      //   return (
+      //     <li key={student.name}>
+      //       <SingleStudent student={student.name} />
+      //     </li>
+      //   );
+      // })}
+  );
 };
 
 export default SingleCampus;
