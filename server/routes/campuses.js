@@ -19,7 +19,9 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
     try {
-       const campus = await Campus.findById(req.params.id)
+       const campus = await Campus.findById((req.params.id), {
+           include:[{model: Student}]
+       })
         res.json(campus)
     } catch(err) {
         next(err)
@@ -28,8 +30,11 @@ router.get('/:id', async (req, res, next) => {
 
 router.get('/:id/students', async (req, res, next) => {
     try {
-        const campus = await Campus.findById(req.params.id)
-        const students = await campus.update(req.body)
+        const campusId = req.params.id
+        const students = await Student.findAll({
+            where: {campusId: campusId},
+            include: [{model: Campus}]
+        })
         res.json(students)
     } catch(err) {
         next(err)
