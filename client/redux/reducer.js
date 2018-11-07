@@ -13,11 +13,9 @@ export default (state = initialState, action) => {
         return {...state, campuses: action.campuses }
       case SELECT_CAMPUS:
         return {...state, selectedCampus: action.campus}
-      // case ADD_CAMPUS:
-      //   newState.campus = state.campuses.concat[action.campus]
-      //     return newState
+      case ADD_CAMPUS:
+          return {...state, campuses: [...state.campuses, action.campus]}
       default:
         return initialState;
     }
-  return state;
 };

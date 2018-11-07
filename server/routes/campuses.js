@@ -32,8 +32,7 @@ router.get('/:id/students', async (req, res, next) => {
     try {
         const campusId = req.params.id
         const students = await Student.findAll({
-            where: {campusId: campusId},
-            include: [{model: Campus}]
+            where: {campusId: campusId}
         })
         res.json(students)
     } catch(err) {
@@ -41,21 +40,23 @@ router.get('/:id/students', async (req, res, next) => {
     }
 })
 
-// router.post('/', async (req, res, next) => {
-//     try {
-//         const newCampus = await Campus.create(req.body)
-//         res.json(newCampus)
-//     } catch(err) {
-//         next(err)
-//     }
-// })
+router.post('/', async (req, res, next) => {
+    try {
+        const newCampus = await Campus.create(req.body)
+        res.status(201).json(newCampus)
+    } catch(err) {
+        next(err)
+    }
+})
 
-// router.post('/:id/students', async (req, res, next) => {
-//     try{
-
-//     } catch(err) {
-//         next(err)
-//     }
-// })
+router.post('/:id/students', async (req, res, next) => {
+    try {
+        const campus = req.params.id
+        const newStudent = await Student.create({...req.body, campusId: campus})
+        res.status(201).json(newStudent)
+    } catch(err) {
+        next(err)
+    }
+})
 
 module.exports = router;

@@ -12,13 +12,18 @@ export default class CampusInput extends Component {
   }
   //your code here
   handleChange(event) {
-    [event.target.name] = event.target.value
+    this.setState({
+      name: event.target.value
+    }) 
+    console.log('name',event.target.name)
+    console.log('value', event.target.value)
   }
 
   render() {
     //your code here
+    return(
     <input onChange = {this.handleChange} />
+    )
     
-    return null;
   }
 }
